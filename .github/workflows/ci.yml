@@ -21,8 +21,8 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.ALI_SSH_PRIVATEKEY}}
           ARGS: "-avzr --delete"
-          SOURCE: "./"
+          SOURCE: "dist"
           REMOTE_HOST: ${{ secrets.ALI_HOST }}
           REMOTE_USER: 'root'
-          TARGET: "/opt/webwiki/docs" 
+          TARGET: "/myapp" 
           
