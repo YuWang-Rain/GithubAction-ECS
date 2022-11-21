@@ -1,0 +1,28 @@
+name: deploy to Ali cloud
+on:
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubunutu-latest
+    steps:
+      - name: checkout repo
+        uses: action/checkout@v3
+      - name: set up node env
+        uses: action/setup-node@v3
+        with:
+          node-version: 16
+      - name: npm install and build
+        run: |
+          npm install
+          npm run build
+      - name: deploy to ali cloud
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.ALI_SSH_PRIVATEKEY}}
+          ARGS: "-avzr --delete"
+          SOURCE: "./"
+          REMOTE_HOST: ${{ secrets.ALI_HOST }}
+          REMOTE_USER: 'root'
+          TARGET: "/opt/webwiki/docs" 
+          
