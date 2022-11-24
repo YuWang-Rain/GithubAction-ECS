@@ -15,13 +15,12 @@ jobs:
       - name: npm install and build
         run: |
           npm install
-          npm run build
       - name: deploy to ali cloud
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.ALI_SSH_PRIVATEKEY}}
           ARGS: "-avzr --delete"
-          SOURCE: "build/"
+          SOURCE: "/"
           REMOTE_HOST: ${{ secrets.ALI_HOST }}
           REMOTE_USER: 'root'
           TARGET: "/myapp" 
